@@ -1,0 +1,19 @@
+Plano de Aula
+
+1. Introdução
+1.1. Por quê Angular?
+  (Vantagens do angular js pra desenvolvedores web)
+1.2. Explorando o framework
+  1.2.1. Módulos
+  1.2.2. Expressões
+  1.2.3. Controllers
+    1.2.3.1. Injeção de dependência
+    1.2.3.2. O component Scope
+    1.2.3.3. Integrando com a view(ng-show, ng-click, ng-repeat)
+  1.2.4. Dados
+    1.2.4.1. JSON
+    1.2.4.2. Array
+1.3. Relembrando a aula
+1.4. Talk is cheap show me the code: Iniciar a app adicionando um registro de gasto a mesma
+
+2. Diretivas
