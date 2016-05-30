@@ -1,0 +1,95 @@
+<!doctype html>
+<html ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <title>Finnance - Angular-JS</title>
+
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Angular-JS App</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <p class='navbar-text'>
+                <span class="badge alert-success"> R$ 1471,00</span>
+              </p>
+            </li>
+            <li>
+              <p class='navbar-btn button-navbar'>
+                <a class='btn btn-primary' onclick='$(".modal-movimentacao").modal("show")'> <span class='glyphicon glyphicon-plus'></span> Adicionar </a>
+              </p>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class='container-fluid margin-top-5'>
+      <div class="list-group">
+        <a href="#" class="list-group-item">
+          Almoço <span class="badge alert-danger"> R$ 14,00</span>
+        </a>
+        <a href="#" class="list-group-item">
+          Almoço <span class="badge alert-danger"> R$ 15,00</span>
+        </a>
+        <a href="#" class="list-group-item">
+          Salário <span class="badge alert-success"> R$ 1500,00</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="modal modal-movimentacao fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Adicionar Movimentação</h4>
+          </div>
+          <div class="modal-body">
+
+            <div class='form-group'>
+              <input type='text' class='form-control' placeholder="Descrição"/>
+            </div>
+
+            <div class='form-group'>
+              <input type='text' class='form-control' placeholder="Valor"/>
+            </div>
+
+            <div class='form-group'>
+              <select class='form-control'>
+                <option class='text-danger'>Despesa</option>
+                <option class='text-success'>Receita</option>
+              </select>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary"><span class='glyphicon glyphicon-plus'></span> Adicionar</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+
+</html>
