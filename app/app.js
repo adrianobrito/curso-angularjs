@@ -1,10 +1,11 @@
-var app = angular.module('app', []);
+var app = angular.module('app', ['ngMessages']);
 
 app.controller('MainCtrl', ['$scope', function($scope){
 
   var MOVIMENTACOES_STORAGE = 'movimentacoes';
   $scope.lastIndex = -1;
   $scope.mode = 'add';
+  $scope.onlyNumbers = /^\d+$/;
 
   var getMovimentacoesStorage = function(){
     if(localStorage.getItem(MOVIMENTACOES_STORAGE)){
@@ -67,6 +68,10 @@ app.controller('MainCtrl', ['$scope', function($scope){
   $scope.getTotalClass = function(){
     return $scope.getTotal() < 0 ? 'alert-danger' : 'alert-success';
   };
+
+  $scope.getSaveButtonClass = function(mode){
+    return mode === 'add' ? 'glyphicon-plus' : 'glyphicon-edit';
+  }
 
   $scope.getTotal = function(){
     var movimentacoes = $scope.movimentacoes;

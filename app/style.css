@@ -4,3 +4,9 @@
 .button-navbar{ margin-right: 10px !important;}
 
 .bold{ font-weight: bolder;}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
