@@ -6,6 +6,7 @@ app.controller('MainCtrl', ['$scope', function($scope){
   $scope.lastIndex = -1;
   $scope.mode = 'add';
   $scope.onlyNumbers = /^\d+$/;
+  $scope.modal = {};
 
   var getMovimentacoesStorage = function(){
     if(localStorage.getItem(MOVIMENTACOES_STORAGE)){
@@ -33,11 +34,11 @@ app.controller('MainCtrl', ['$scope', function($scope){
       angular.copy(movimentacao, $scope.movimentacao);
     }
 
-    $('#modalMovimentacao').modal("show");
+    $scope.modal.show();
   };
 
   $scope.closeModal = function(){
-    $('#modalMovimentacao').modal("hide");
+    $scope.modal.hide();
   }
 
   $scope.add = function(movimentacao){
