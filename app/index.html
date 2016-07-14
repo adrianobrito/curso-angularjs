@@ -26,12 +26,13 @@
           <ul class="nav navbar-nav navbar-right">
             <li>
               <p class='navbar-text'>
+                <span class="badge" ng-class='getTotalClass()'>{{valorDolar | currency : "US$ "}}</span>
                 <span class="badge" ng-class='getTotalClass()'>{{getTotal() | currency : "R$ "}}</span>
               </p>
             </li>
             <li>
               <p class='navbar-btn button-navbar'>
-                <a class='btn btn-primary' ng-click='openModal()'>
+                <a class='btn btn-primary' ng-click="openModal()">
                   <span class='glyphicon glyphicon-plus'></span> Adicionar
                 </a>
               </p>
@@ -83,8 +84,8 @@
                     name='descricao'
                     required
                     ng-minlength='3'
-                    ng-minlength='30'
-                    messages-for='movimentacaoForm.descricao'/>
+                    ng-minlength='30'/>
+            <messages-for bind-to='movimentacaoForm.descricao'/>
           </div>
 
           <div class='form-group'>
@@ -93,8 +94,8 @@
               placeholder="Valor"
               ng-model='movimentacao.valor'
               name='valor'
-              required
-              messages-for='movimentacaoForm.valor'/>
+              required/>
+              <messages-for bind-to='movimentacaoForm.valor'/>
           </div>
 
           <div class='form-group'>
@@ -102,10 +103,10 @@
               ng-options='tipo for tipo in tipos'
               ng-model='movimentacao.tipo'
               name='tipo'
-              required
-              messages-for='movimentacaoForm.tipo'>
+              required>
               <option value="">Selecione...</option>
             </select>
+            <messages-for bind-to='movimentacaoForm.tipo'/>
           </div>
 
         </modal-body>
@@ -132,6 +133,7 @@
     <script src="lib/angular-messages/angular-messages.min.js"></script>
     <script src="app.js"></script>
     <script src="directives.js"></script>
+    <script src="services.js"></script>
   </body>
 
 </html>

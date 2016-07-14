@@ -13,7 +13,7 @@ var ModalContentFactory = {
   }
 };
 
-app.directive('modal', function(){
+app.directive('modal', ['$timeout',function($timeout){
   return {
     restrict: 'E',
     templateUrl: 'templates/modal.html',
@@ -34,7 +34,7 @@ app.directive('modal', function(){
       }
     }
   };
-});
+}]);
 
 app.directive('modalHeader', function(){
   return ModalContentFactory.create('modal-header');
@@ -48,25 +48,13 @@ app.directive('modalFooter', function(){
   return ModalContentFactory.create('modal-footer');
 });
 
-app.directive('messagesFor', ['$http', '$compile',function($http, $compile){
+app.directive('messagesFor', [function($http){
   return {
-    restrict: 'A',
+    restrict: 'E',
     replace: true,
-    scope: false,
-    link: function(scope, elem, attrs){
-      var applyFields = function(template, replacement){
-        var find = /FIELD/g;
-        return template.replace(find, replacement);
-      }
-
-      $http.get('templates/messages-for.html')
-        .then(function(response){
-          var template = applyFields(response.data, attrs.messagesFor);
-          var elementTemplate = angular.element(template);
-          elementTemplate.insertAfter(elem);
-          $compile(elementTemplate)(scope);
-        }
-      );
+    templateUrl: 'templates/messages-for.html',
+    scope: {
+      bindTo: '='
     }
   };
 }]);

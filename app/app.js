@@ -1,12 +1,30 @@
 var app = angular.module('app', ['ngMessages']);
 
-app.controller('MainCtrl', ['$scope', function($scope){
+app.controller('MainCtrl', ['$scope',
+                            'MovimentacaoRepository',
+                            'CotacaoService',
+                            '$interval',
+                            '$http',
+                            function($scope,
+                              MovimentacaoRepository,
+                              CotacaoService,
+                              $interval,
+                              $http){
 
   var MOVIMENTACOES_STORAGE = 'movimentacoes';
   $scope.lastIndex = -1;
   $scope.mode = 'add';
   $scope.onlyNumbers = /^\d+$/;
   $scope.modal = {};
+
+  $interval(function(){
+    CotacaoService.realToDolar().then(
+      function(response){
+        var cotacao = response.data;
+        $scope.valorDolar = parseFloat(cotacao.rates.USD) * parseFloat($scope.getTotal());
+      }
+    );
+  }, 1000);
 
   var getMovimentacoesStorage = function(){
     if(localStorage.getItem(MOVIMENTACOES_STORAGE)){
@@ -20,11 +38,12 @@ app.controller('MainCtrl', ['$scope', function($scope){
     localStorage.setItem(MOVIMENTACOES_STORAGE, JSON.stringify(movimentacoes));
   }
 
-  $scope.movimentacoes = getMovimentacoesStorage();
+  $scope.movimentacoes = MovimentacaoRepository.getMovimentacoes();
   $scope.tipos = ['Despesa', 'Receita'];
 
   $scope.openModal = function(mode, movimentacao){
-    $scope.mode = !mode ? 'add' : mode;
+    console.log("aq");
+    $scope.mode = mode !== undefined ? mode : 'add';
 
     if($scope.mode === 'add'){
       $scope.movimentacao = {};
@@ -39,26 +58,22 @@ app.controller('MainCtrl', ['$scope', function($scope){
 
   $scope.closeModal = function(){
     $scope.modal.hide();
-  }
+  };
 
   $scope.add = function(movimentacao){
-    $scope.movimentacoes.push(movimentacao);
-    updateMovimentacoesStorage($scope.movimentacoes);
+    MovimentacaoRepository.create(movimentacao);
     $scope.closeModal();
   }
 
   $scope.edit = function(movimentacao, index){
-    $scope.movimentacoes[index] = movimentacao;
-    updateMovimentacoesStorage($scope.movimentacoes);
+    MovimentacaoRepository.update(movimentacao, index);
     $scope.closeModal();
   };
 
   $scope.delete = function(movimentacao){
     var movimentacoes = $scope.movimentacoes;
     if(confirm("Você realmente deseja remover este item?")){
-      var index = movimentacoes.indexOf(movimentacao);
-      movimentacoes.splice(index, 1);
-      updateMovimentacoesStorage(movimentacoes);
+      MovimentacaoRepository.delete(movimentacao);
     }
   }
 
